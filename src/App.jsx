@@ -1,24 +1,43 @@
 import "./Global.css";
 
-import Login from "./components/Login";
-import { supabase } from "../supabaseClient";
-import { useEffect } from "react";
+import { createContext, useEffect, useRef, useState } from "react";
 
-const App = () => {
+import HomePage from "./components/HomePage";
+import Login from "./components/Login";
+import { getUserMetadata } from "./helper";
+import { supabase } from "../supabaseClient";
+
+export const DataContext = createContext(null);
+export default function App() {
+  const isFirstLogin = useRef(true);
+  const [loginSession, setLoginSession] = useState(null);
+  const [userMetadata, setUserMetadata] = useState({
+    name: "",
+    email: "",
+    phone: "",
+  });
+
   useEffect(() => {
     const { data } = supabase.auth.onAuthStateChange((event, session) => {
-      console.log(event, session);
-      if (event === "SIGNED_IN") {
-        // handle sign in event
+      if (event === "SIGNED_IN" && isFirstLogin.current) {
+        setLoginSession(session);
+        isFirstLogin.current = false;
+        getUserMetadata(session).then((metadata) => {
+          setUserMetadata(metadata);
+        });
       } else if (event === "SIGNED_OUT") {
-        // handle sign out event
+        setLoginSession(null);
+        isFirstLogin.current = true;
       }
     });
     return () => {
       data.subscription.unsubscribe();
     };
   }, []);
-  return <Login />;
-};
 
-export default App;
+  return (
+    <DataContext.Provider value={{ userMetadata }}>
+      {loginSession ? <HomePage /> : <Login />}
+    </DataContext.Provider>
+  );
+}

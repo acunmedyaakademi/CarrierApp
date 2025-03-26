@@ -66,14 +66,18 @@ const Login = () => {
               required
             />
           </div>
-          {isInvalid && <p className="invalid-login-msg">Geçersiz e-posta veya şifre</p>}
+          {isInvalid && (
+            <p className="invalid-login-msg">Geçersiz e-posta veya şifre</p>
+          )}
 
           <button type="submit" className="login-button">
             Giriş Yap
           </button>
         </form>
 
-        <div className="login-footer">&copy; {new Date().getFullYear()} Kurye Taşımacılık Servisi</div>
+        <div className="login-footer">
+          &copy; {new Date().getFullYear()} Kurye Taşımacılık Servisi
+        </div>
       </div>
     </div>
   );
