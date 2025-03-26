@@ -1,0 +1,82 @@
+.home-container {
+  display: grid;
+  gap: 24px;
+  padding: 24px;
+}
+
+.page-header {
+  text-align: center;
+  font-size: 24px;
+}
+
+.home-orders-tab-btns {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  justify-content: center;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 4px;
+  border-radius: 24px;
+}
+
+.home-orders-tab-btn {
+  padding: 8px;
+  border-radius: 24px;
+  border: none;
+  background-color: transparent;
+  color: #f88527;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+
+  &.active {
+    background-color: #f88527;
+    color: #fff;
+  }
+}
+
+.home-orders-list {
+  display: grid;
+  gap: 16px;
+}
+
+.home-order-card {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  box-shadow: 0 0px 4px rgba(0, 0, 0, 0.1);
+  img {
+    width: 100px;
+    height: 100px;
+    border-radius: 8px;
+  }
+
+  svg {
+    margin-left: auto;
+    color: #f88527;
+  }
+}
+
+.home-order-card-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.home-order-status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: #666;
+  span:first-child {
+    padding-right: 8px;
+    border-right: 1px solid #ccc;
+  }
+}
+
+.home-order-name {
+  font-size: 16px;
+  font-weight: 500;
+  color: #333;
+}
